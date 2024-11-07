@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# This script displays listening TCP and UDP ports with the PID and program name.
+
+sudo ss -lntup

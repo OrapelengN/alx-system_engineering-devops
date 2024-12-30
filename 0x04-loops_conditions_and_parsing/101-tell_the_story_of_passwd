@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # This script displays a story based on the /etc/passwd file
 
 while IFS=: read -r username _ uid gid _ homedir shell; do

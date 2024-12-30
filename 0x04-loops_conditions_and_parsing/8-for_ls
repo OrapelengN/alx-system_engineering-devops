@@ -1,7 +1,11 @@
 #!/usr/bin/env bash
 # This script displays the content of the current directory, showing only the part of the name after the first dash
 
+# Using a glob pattern with `*` to match all files containing a dash
 for filename in *-*; do
-  # Extract and display the part of the filename after the first dash
-  echo "${filename#*-}"
+  # Only process regular files (not directories or other special files)
+  if [ -f "$filename" ]; then
+    # Extract and display the part of the filename after the first dash
+    echo "${filename#*-}"
+  fi
 done

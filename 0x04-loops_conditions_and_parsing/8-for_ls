@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# This script displays the content of the current directory, showing only the part of the name after the first dash
+
+for filename in $(ls); do
+  if [[ "$filename" == *"-"* ]]; then
+    # Extract the part after the first dash
+    echo "${filename#*-}"
+  fi
+done

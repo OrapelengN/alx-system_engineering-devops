@@ -9,11 +9,5 @@ package { 'Werkzeug==2.1.0':
 package { 'Flask==2.1.0':
   ensure   => 'installed',
   provider => pip3,
-  # require  => Package['Werkzeug==2.1.0'],
-}
-
-file { '/root/get_flask_version.py':
-  ensure  => present,
-  content => "#!/usr/bin/python3\nimport flask\n\nprint(f'Flask {flask.__version__}')\n",
-  mode    => '0755',
+  require  => Package['Werkzeug==2.1.0'],
 }

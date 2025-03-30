@@ -9,5 +9,5 @@ package { 'Werkzeug==2.1.0':
 package { 'Flask==2.1.0':
   ensure   => 'installed',
   provider => pip3,
-  require => Package['Werkzeug==2.1.0'],
+  require  => Package['Werkzeug==2.1.0'],
 }

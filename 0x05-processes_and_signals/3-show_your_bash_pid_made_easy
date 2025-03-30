@@ -4,7 +4,7 @@
 pgrep -a bash | while read -r line; do
   pid=$(echo "$line" | awk '{print $1}')
   command=$(echo "$line" | awk '{$1=""; print $0}')
-  if [[ "$command" == *"/bin/bash"* ]]; then
+  if [[ "$command" == *"bash"* ]]; then
     printf "%s%s\n" "$pid" "$command"
   fi
 done

@@ -1,10 +1,9 @@
 #!/usr/bin/env bash
-# Configures localhost to 127.0.0.2 and facebook.com to 8.8.8.8
+# Configures localhost to 127.0.0.2 and facebook.com to 8.8.8.8, with precise formatting.
 
-# Modify /etc/hosts
-sudo sed -i "s/127.0.0.1[[:space:]]\+localhost/127.0.0.2 localhost/" /etc/hosts
-sudo sed -i "/facebook.com/d" /etc/hosts #Remove any previous facebook.com entry
+# Modify /etc/hosts for localhost
+sudo sed -i "s/^127.0.0.1[[:space:]]\+localhost$/127.0.0.2 localhost/" /etc/hosts
+
+# Remove previous facebook.com entry and add the new one
+sudo sed -i "/facebook.com/d" /etc/hosts
 echo "8.8.8.8 facebook.com" | sudo tee -a /etc/hosts
-
-echo "localhost is now set to 127.0.0.2"
-echo "facebook.com is now set to 8.8.8.8"

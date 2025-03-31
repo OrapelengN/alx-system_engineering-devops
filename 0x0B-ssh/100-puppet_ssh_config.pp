@@ -5,13 +5,15 @@ file_line { 'Declare identity file':
   path   => '/etc/ssh/ssh_config',
   line   => '  IdentityFile ~/.ssh/school',
   match  => '  IdentityFile',
+  replace => true,
 }
 
 file_line { 'Turn off passwd auth':
   ensure => present,
   path   => '/etc/ssh/ssh_config',
-  line   => '  PasswordAuthentication no',
-  match  => '  PasswordAuthentication',
+  line   => 'PasswordAuthentication no',
+  match  => 'PasswordAuthentication',
+  replace => true,
 }
 
 file { '/etc/ssh/ssh_config' :

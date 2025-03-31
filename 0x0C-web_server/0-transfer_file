@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# Transfers a file from the client to a server.
 
 # Check if the correct number of arguments is provided
 if [ $# -lt 4 ]; then

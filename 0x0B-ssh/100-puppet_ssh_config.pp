@@ -2,7 +2,7 @@
 
 exec { 'remove_duplicate_identityfile':
   command => "sed -i '/^  IdentityFile/d' /etc/ssh/ssh_config",
-  onlyif  => "grep -c '^  IdentityFile' /etc/ssh/ssh_config | grep -q '[2-9]'",
+  onlyif  => "/bin/grep -c '^  IdentityFile' /etc/ssh/ssh_config | /bin/grep -q '[2-9]'",
   before  => File_line['Declare identity file'],
 }
 

@@ -11,12 +11,26 @@ mkdir -p /var/www/html
 # Replace the default index.html with "Hello World!"
 echo "Hello World!" > /var/www/html/index.html
 
-# Restart Nginx (using service)
+# Restart Nginx
 service nginx restart
 
-#Check if nginx is running
+# Check if Nginx is running and output the result
 if service nginx status | grep -q "active (running)"; then
   echo "Nginx is running"
 else
-  echo "Nginx is not running"
+  echo "Nginx is NOT running"
+  # Add debugging information
+  echo "Nginx status:"
+  service nginx status
+  echo "Nginx error log:"
+  tail /var/log/nginx/error.log
+  exit 1 # Exit with error if Nginx is not running.
+fi
+
+# Check if Nginx is listening on port 80
+if netstat -tuln | grep -q ":80 "; then
+    echo "Nginx is listening on port 80"
+else
+    echo "Nginx is not listening on port 80"
+    exit 1
 fi

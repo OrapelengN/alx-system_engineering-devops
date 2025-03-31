@@ -5,8 +5,18 @@
 apt-get update -y
 apt-get install -y nginx
 
+# Ensure the /var/www/html directory exists
+mkdir -p /var/www/html
+
 # Replace the default index.html with "Hello World!"
 echo "Hello World!" > /var/www/html/index.html
 
-# Restart Nginx (using service, as systemctl is not allowed)
+# Restart Nginx (using service)
 service nginx restart
+
+#Check if nginx is running
+if service nginx status | grep -q "active (running)"; then
+  echo "Nginx is running"
+else
+  echo "Nginx is not running"
+fi

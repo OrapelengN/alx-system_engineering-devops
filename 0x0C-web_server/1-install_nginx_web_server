@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# Installs and configures Nginx web server
+
+# Update package lists and install Nginx
+apt-get update -y
+apt-get install -y nginx
+
+# Replace the default index.html with "Hello World!"
+echo "Hello World!" > /var/www/html/index.html
+
+# Restart Nginx (using service, as systemctl is not allowed)
+service nginx restart

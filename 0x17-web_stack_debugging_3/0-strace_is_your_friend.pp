@@ -42,8 +42,8 @@ service { 'nginx':
 
 exec { 'wordpress_database_setup':
   command => "mysql -u root -e 'CREATE DATABASE IF NOT EXISTS wordpress; " +
-             "GRANT ALL PRIVILEGES ON wordpress.* TO \"wpuser\"@\"localhost\" " +
-             "IDENTIFIED BY \"your_password\"; FLUSH PRIVILEGES;'",
+  "GRANT ALL PRIVILEGES ON wordpress.* TO \"wpuser\"@\"localhost\" " +
+  "IDENTIFIED BY \"your_password\"; FLUSH PRIVILEGES;'",
   require => Package['mysql-server'],
 }
 

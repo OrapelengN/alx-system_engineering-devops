@@ -3,12 +3,21 @@ file { '/var/www/html/':
   ensure => directory,
 }
 
+file { '/root/alx-system_engineering-devops/0x17-web_stack_debugging_3/templates':
+  ensure => directory,
+}
+
+file { '/root/alx-system_engineering-devops/0x17-web_stack_debugging_3/templates/0-strace_is_your_friend':
+  ensure => directory,
+  require => File['/root/alx-system_engineering-devops/0x17-web_stack_debugging_3/templates'],
+}
+
 package { ['wget', 'tar']:
   ensure => installed,
 }
 
 exec { 'download_wordpress':
-  command => 'wget https://wordpress.org/latest.tar.gz',
+  command => '/usr/bin/wget https://wordpress.org/latest.tar.gz',
   cwd     => '/var/www/html/',
   creates => '/var/www/html/latest.tar.gz',
   require => File['/var/www/html/'],
@@ -33,6 +42,7 @@ file { '/var/www/html/wp-config.php':
 file { '/etc/nginx/sites-available/default':
   content => template('/root/alx-system_engineering-devops/0x17-web_stack_debugging_3/templates/0-strace_is_your_friend/nginx_default.erb'),
   notify  => Service['nginx'],
+  require => Package['php5-fpm'], #ensure php-fpm is installed before nginx config is applied.
 }
 
 service { 'nginx':
@@ -41,10 +51,9 @@ service { 'nginx':
 }
 
 exec { 'wordpress_database_setup':
-  command => "mysql -u root -e 'CREATE DATABASE IF NOT EXISTS wordpress; " +
-  "GRANT ALL PRIVILEGES ON wordpress.* TO \"wpuser\"@\"localhost\" " +
-  "IDENTIFIED BY \"your_password\"; FLUSH PRIVILEGES;'",
+  command => "mysql -u root -p'Andronicca\\*45' -e 'CREATE DATABASE IF NOT EXISTS wordpress; GRANT ALL PRIVILEGES ON wordpress.* TO \"wpuser\"@\"localhost\" IDENTIFIED BY \"Andronicca\\*45\"; FLUSH PRIVILEGES;'",
   require => Package['mysql-server'],
+  unless => "mysql -u root -p'Andronicca\\*45' -e 'SHOW DATABASES LIKE \"wordpress\"' | grep wordpress",
 }
 
 package { 'mysql-server':
@@ -62,4 +71,13 @@ service { 'php7.4-fpm':
 
 package { 'php-fpm':
   ensure => installed,
+}
+
+package { 'php5-fpm': # or php7.4-fpm, or whatever your version is.
+  ensure => installed,
+}
+
+service { 'php5-fpm': # or php7.4-fpm
+  ensure  => running,
+  require => Package['php5-fpm'],
 }

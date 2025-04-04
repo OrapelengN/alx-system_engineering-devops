@@ -26,12 +26,12 @@ exec { 'move_wordpress_files':
 }
 
 file { '/var/www/html/wp-config.php':
-  content => template('0-strace_is_your_friend/wp-config.php.erb'),
+  content => template('/root/alx-system_engineering-devops/0x17-web_stack_debugging_3/templates/0-strace_is_your_friend/wp-config.php.erb'),
   require => Exec['move_wordpress_files'],
 }
 
 file { '/etc/nginx/sites-available/default':
-  content => template('0-strace_is_your_friend/nginx_default.erb'),
+  content => template('/root/alx-system_engineering-devops/0x17-web_stack_debugging_3/templates/0-strace_is_your_friend/nginx_default.erb'),
   notify  => Service['nginx'],
 }
 

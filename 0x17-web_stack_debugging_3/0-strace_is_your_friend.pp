@@ -41,7 +41,9 @@ service { 'nginx':
 }
 
 exec { 'wordpress_database_setup':
-  command => "mysql -u root -e 'CREATE DATABASE IF NOT EXISTS wordpress; GRANT ALL PRIVILEGES ON wordpress.* TO \"wpuser\"@\"localhost\" IDENTIFIED BY \"your_password\"; FLUSH PRIVILEGES;'",
+  command => "mysql -u root -e 'CREATE DATABASE IF NOT EXISTS wordpress; " +
+             "GRANT ALL PRIVILEGES ON wordpress.* TO \"wpuser\"@\"localhost\" " +
+             "IDENTIFIED BY \"your_password\"; FLUSH PRIVILEGES;'",
   require => Package['mysql-server'],
 }
 
@@ -54,7 +56,7 @@ package { 'php-mysql':
 }
 
 service { 'php7.4-fpm':
-  ensure => running,
+  ensure  => running,
   require => Package['php-fpm'],
 }
 

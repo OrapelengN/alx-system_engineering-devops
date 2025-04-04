@@ -9,7 +9,7 @@ file { '/root/alx-system_engineering-devops/0x17-web_stack_debugging_3/templates
 }
 
 file { '/root/alx-system_engineering-devops/0x17-web_stack_debugging_3/templates/0-strace_is_your_friend':
-  ensure => directory,
+  ensure  => directory,
   require => File['/root/alx-system_engineering-devops/0x17-web_stack_debugging_3/templates'],
 }
 
@@ -28,7 +28,7 @@ package { 'php5-mysql':
 
 # Create /var/www/html
 file { '/var/www/html/':
-  ensure => directory,
+  ensure  => directory,
   require => File['/var/www'], # Make sure /var/www is created first.
 }
 
@@ -77,7 +77,9 @@ exec { 'wordpress_database_setup':
 }
 
 # exec { 'wordpress_database_setup':
-#  command => "/usr/bin/mysql -u root -p'Andronicca\\*45' -e \"CREATE DATABASE IF NOT EXISTS wordpress; GRANT ALL PRIVILEGES ON wordpress.* TO \\\"wpuser\\\"@\\\"localhost\\\" IDENTIFIED BY \\\"Andronicca\\*45\\\"; FLUSH PRIVILEGES;\"",
+#  command => "/usr/bin/mysql -u root -p'Andronicca\\*45' -e 
+# \"CREATE DATABASE IF NOT EXISTS wordpress; GRANT ALL PRIVILEGES ON wordpress.* 
+# TO \\\"wpuser\\\"@\\\"localhost\\\" IDENTIFIED BY \\\"Andronicca\\*45\\\"; FLUSH PRIVILEGES;\"",
 #  require => Package['mysql-server'],
 #  unless  => "/usr/bin/mysql -u root -p'Andronicca\\*45' -e \"SHOW DATABASES LIKE \\\"wordpress\\\"\" | /bin/grep wordpress",
 # }
